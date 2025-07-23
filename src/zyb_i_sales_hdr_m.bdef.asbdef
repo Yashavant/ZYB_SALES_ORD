@@ -1,0 +1,76 @@
+managed; //implementation in class zbp_yb_i_sales_hdr_m unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZYB_I_SALES_HDR_M alias Header
+implementation in class zbp_yb_i_sales_hdr_m unique
+persistent table zyb_sales_hdr_m
+draft table zyb_sales_hdrd_m
+lock master total etag LastChangedAt
+authorization master ( instance )
+etag master LastChangedAt
+early numbering
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly ) SalesOrderId,CreatedBy,CreatedAt,LastChangedBy,LastChangedAt;  //mandatory : create
+  static factory action CreateNew [1];
+  association _Item { create; with draft; }
+
+//Actions
+//Determination
+  determination DefaultValues on modify { create; }
+//Validation
+
+  //Draft Actions
+  draft action Activate optimized;
+  draft action Edit;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
+
+  mapping for zyb_sales_hdr_m
+    {
+      SalesOrderId     = sales_order_id;
+      OrderCreatedDate = order_created_date;
+      OrderCreatedUser = order_created_user;
+      Category         = category;
+      Description      = description;
+      CustomerId       = customer_id;
+      CreatedBy        = created_by;
+      CreatedAt        = created_at;
+      LastChangedBy    = last_changed_by;
+      LastChangedAt    = last_changed_at;
+    }
+}
+
+
+define behavior for ZYB_I_SALES_ITM_M alias Item
+implementation in class zbp_yb_i_sales_Itm_m unique
+persistent table zyb_sales_itm_m
+draft table zyb_sales_itmd_m
+lock dependent by _Header
+authorization dependent by _Header
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) SalesOrderId, ItemNumber;  //mandatory : create
+  association _Header { with draft; }
+  mapping for zyb_sales_itm_m
+    {
+      SalesOrderId        = sales_order_id;
+      ItemNumber          = item_number;
+      MaterialId          = material_id;
+      MaterialDescription = material_description;
+      Quantity            = Quantity;
+      Uom                 = Uom;
+      Price               = Price;
+      Currency            = Currency;
+      CreatedBy           = Created_By;
+      CreatedAt           = Created_At;
+      LastChangedBy       = last_changed_by;
+      LastChangedAt       = last_changed_at;
+    }
+}

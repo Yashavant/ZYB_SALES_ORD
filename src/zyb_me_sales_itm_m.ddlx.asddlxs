@@ -1,0 +1,60 @@
+@Metadata.layer:#PARTNER
+@UI.headerInfo: {
+    typeName: 'Order Item',
+    typeNamePlural: 'Order Items',
+    title: {
+        type: #STANDARD,
+        label: 'Material',
+        value: 'MaterialDescription'
+    },
+    description: {
+        type: #STANDARD,
+        label: 'Quantity',
+        value: 'Quantity'
+    }
+}
+annotate entity ZYB_C_SALES_ITM_M with
+{
+  @UI.facet: [{
+      id: 'idItems',
+      purpose: #STANDARD,
+      position: 10,
+      label: 'Order Items',
+      type: #IDENTIFICATION_REFERENCE
+  }]
+  @UI.lineItem: [{ position: 10 ,label: 'Sales Order' }]
+  @UI.identification: [{ position: 10 ,label: 'Sales Order' }]
+  SalesOrderId;
+
+  @UI.lineItem: [{ position: 20 ,label: 'Order Item' }]
+  @UI.identification: [{ position: 20 ,label: 'Order Item' }]
+  ItemNumber;
+  @UI.lineItem: [{ position: 30 ,label: 'Material ID' }]
+  @UI.identification: [{ position: 30 ,label: 'Material ID' }]
+  MaterialId;
+  @UI.lineItem: [{ position: 40 ,label: 'Material Desc' }]
+  @UI.identification: [{ position: 40 ,label: 'Material Desc' }]
+  MaterialDescription;
+  @UI.lineItem: [{ position: 50 ,label: 'Quantity' }]
+  @UI.identification: [{ position: 50 ,label: 'Quantity' }]
+  @UI.textArrangement:#TEXT_LAST
+  Quantity;
+  @UI.lineItem: [{ position: 60 ,label: 'Qty Unit' }]
+  @UI.identification: [{ position: 60 ,label: 'Qty Unit' }]
+  Uom;
+  @UI.lineItem: [{ position: 70 ,label: 'Price' }]
+  @UI.identification: [{ position: 70 ,label: 'Price' }]
+  Price;
+  @UI.lineItem: [{ position: 80 ,label: 'Price Unit' }]
+  @UI.identification: [{ position: 80 ,label: 'Price Unit' }]
+  Currency;
+  @UI.hidden: true
+  CreatedBy;
+  @UI.hidden: true
+  CreatedAt;
+  @UI.hidden: true
+  LastChangedBy;
+  @UI.hidden: true
+  LastChangedAt;
+
+}

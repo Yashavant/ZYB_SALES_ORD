@@ -1,0 +1,63 @@
+@Metadata.layer: #PARTNER
+@UI.headerInfo: {
+    typeName: 'Order',
+    typeNamePlural: 'Orders',
+    title: {
+        type: #STANDARD,
+        label: 'Customer',
+        value: 'CustomerId'
+    },
+    description: {
+        type: #STANDARD,
+        label: 'Order',
+        value: 'Description'
+    }
+}
+annotate entity ZYB_C_SALES_HDR_M with
+{
+  @UI.facet: [{
+      id: 'idSalesHeader',
+      purpose: #STANDARD,
+      position: 10,
+      label: 'Order Details',
+      type: #IDENTIFICATION_REFERENCE
+  },{
+      id: 'idSalesItem',
+      purpose: #STANDARD,
+      position: 20,
+      label: 'Order Items',
+      type: #LINEITEM_REFERENCE,
+      targetElement: '_Item'
+  }
+
+  ]
+
+  @UI.lineItem: [{ position: 10 ,label: 'Sales Order' },{ type: #FOR_ACTION, dataAction: 'CreateNew', label: 'Create New' }]
+  @UI.identification: [{position: 10,label: 'Sales Order' }]
+  SalesOrderId;
+  @UI.lineItem: [{ position: 20 ,label: 'Creation Date' }]
+  @UI.identification: [{ position: 20 ,label: 'Creation Date' }]
+  OrderCreatedDate;
+  @UI.lineItem: [{ position: 30 ,label: 'Creation By' }]
+  @UI.identification: [{ position: 30 ,label: 'Creation By' }]
+  OrderCreatedUser;
+  @UI.lineItem: [{ position: 40 ,label: 'Category' }]
+  @UI.identification: [{ position: 40 ,label: 'Category' }]
+  Category;
+  @UI.lineItem: [{ position: 50 ,label: 'Description' }]
+  @UI.identification: [{ position: 50 ,label: 'Description' }]
+  Description;
+  @UI.lineItem: [{ position: 60 ,label: 'Customer ID' }]
+  @UI.identification: [{ position: 60 ,label: 'Customer ID' }]
+  CustomerId;
+
+  @UI.identification: [{ position: 70 ,label: 'Created By'}]
+  CreatedBy;
+  @UI.identification: [{ position: 80 ,label: 'Created At' }]
+  CreatedAt;
+  @UI.identification: [{ position: 90 ,label: 'Changed By' }]
+  LastChangedBy;
+  @UI.identification: [{ position: 100 ,label: 'Changed At' }]
+  LastChangedAt;
+
+}

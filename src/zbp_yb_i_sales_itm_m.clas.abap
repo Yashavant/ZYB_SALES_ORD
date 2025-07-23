@@ -1,0 +1,5 @@
+CLASS zbp_yb_i_sales_itm_m DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zyb_i_sales_hdr_m.
+ENDCLASS.
+
+CLASS zbp_yb_i_sales_itm_m IMPLEMENTATION.
+ENDCLASS.

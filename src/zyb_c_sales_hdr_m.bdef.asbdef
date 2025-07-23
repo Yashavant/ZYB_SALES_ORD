@@ -1,0 +1,27 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZYB_C_SALES_HDR_M alias Header
+{
+  use create;
+  use update;
+  use delete;
+  use action CreateNew;
+  use association _Item { create; with draft; }
+  use action Activate;
+  use action Edit;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+
+}
+
+
+define behavior for ZYB_C_SALES_ITM_M alias Item
+{
+  //use create;
+  use update;
+  use delete;
+  use association _Header{ with draft;}
+}

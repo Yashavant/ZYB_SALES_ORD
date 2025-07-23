@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Def for Order Header-Managed'
+define service ZYB_SD_SALES_HDR_M {
+  expose ZYB_C_SALES_HDR_M as Header;
+  expose ZYB_C_SALES_ITM_M as Item;
+}
